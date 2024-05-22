@@ -1,3 +1,5 @@
+let statusBoataoReiniciar = false;
+
 function sortear()
 {
     let quantidade = parseInt(document.getElementById("quantidade").value);
@@ -21,8 +23,36 @@ function sortear()
 
     let resultado = document.getElementById("resultado");
     resultado.innerHTML = `<label class="texto__paragrafo">Números sorteados: ${sorteados}</label>`
+    statusBoataoReiniciar = true;
+    alterarStatusBotao(statusBoataoReiniciar);
 }
 
 function obterNumeroAleatorio(min, max) {
     return Math.floor(Math.random() * (max - min + 1)) + min;
+}
+
+function alterarStatusBotao(statusBoataoReiniciar)
+{
+    let boato = document.getElementById("btn-reiniciar");
+    if (statusBoataoReiniciar == true)
+    {
+        boato.classList.remove("container__botao-desabilitado");
+        boato.classList.add("container__botao");
+    }
+    else 
+    {
+        boato.classList.remove("container__botao");
+        boato.classList.add("container__botao-desabilitado");
+    }
+}
+
+function reiniciar()
+{
+    document.getElementById("quantidade").value = "";
+    document.getElementById("de").value = "";
+    document.getElementById("ate").value = "";
+    document.getElementById("resultado").innerHTML = `<label class="texto__paragrafo">Números sorteados:  nenhum até agora</label>`;
+    
+    statusBoataoReiniciar = false;
+    alterarStatusBotao(statusBoataoReiniciar);
 }
